@@ -75,8 +75,9 @@ def generate_code(aiida_localhost):
 
     def _generate_code(entry_point):
         from aiida.plugins import DataFactory
-        code = DataFactory('code')(input_plugin_name=entry_point, remote_computer_exec=[aiida_localhost, '/bin/bash'])
-        return code
+        return DataFactory('code')(
+            label=entry_point, input_plugin_name=entry_point, remote_computer_exec=[aiida_localhost, '/bin/bash']
+        ).store()
 
     return _generate_code
 
